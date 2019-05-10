@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene("GameOver");
     }
 
     // Start is called before the first frame update
@@ -60,6 +60,13 @@ public class Player : MonoBehaviour
         transform.position += Vector3.up * speed * Time.deltaTime;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+      if(other.gameObject.CompareTag("Coins"))
+      {
+        Destroy(other.gameObject);
+      }
+    }
+
 
 }
-
