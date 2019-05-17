@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     public int health = 25;
 
+    public bool Right;
+
     public GameObject pizzaUI;
 
     public Animator anim;
@@ -49,10 +51,17 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += Vector3.left * speed1 * Time.deltaTime;
+            anim.SetInteger("Direction", -1);
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += Vector3.right * speed1 * Time.deltaTime;
+            anim.SetInteger("Direction", 1);
+        }
+
+        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        {
+            anim.SetInteger("Direction", 0);
         }
 
         timer += Time.deltaTime;
@@ -68,5 +77,18 @@ public class Player : MonoBehaviour
       }
     }
 
+    private void FixedUpdate()
+    {
+        float move = Input.GetAxis("Horizontal");
+
+        if (move > 0 && Right) Flip();
+        if (move < 0 && !Right) Flip();
+    }
+
+    void Flip()
+    {
+        Right = !Right;
+        transform.Rotate(Vector3.up * 180);
+    }
 
 }
