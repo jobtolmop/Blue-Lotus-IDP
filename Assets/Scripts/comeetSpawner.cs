@@ -18,12 +18,15 @@ public class comeetSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextSpawn)
+        if (Time.time > 3)
         {
-          nextSpawn = Time.time + spawnRate;
-          randX = Random.Range(-10.60f, 10.60f);
-          whereToSpawn = new Vector2 (randX, transform.position.y);
-          Instantiate (enemy, whereToSpawn, Quaternion.identity);
+            if (Time.time > nextSpawn)
+            {
+                nextSpawn = Time.time + spawnRate;
+                randX = Random.Range(-8.60f, 8.60f);
+                whereToSpawn = new Vector2(randX, transform.position.y);
+                Instantiate(enemy, whereToSpawn, Quaternion.identity);
+            }
         }
     }
 }
